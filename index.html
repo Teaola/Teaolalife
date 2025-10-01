@@ -245,6 +245,22 @@
             font-size: 0.9rem;
         }
 
+        .ltc-icon {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-left: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .ltc-icon:hover {
+            color: #888;
+            transform: scale(1.1);
+        }
+
         .discord-link {
             display: inline-block;
             background: rgba(255, 255, 255, 0.1);
@@ -440,6 +456,10 @@
                     <span class="profile-value">14</span>
                 </div>
                 <div class="profile-item">
+                    <span class="profile-label">Node</span>
+                    <span class="profile-value">Running private Monero node</span>
+                </div>
+                <div class="profile-item">
                     <span class="profile-label">IDE</span>
                     <span class="profile-value">VS Code</span>
                 </div>
@@ -501,7 +521,10 @@
         <div class="card">
             <h2 class="section-title">Friends</h2>
             <div class="friend-item">
-                <div class="friend-name">Smaxy</div>
+                <div class="friend-name">
+                    Smaxy 
+                    <span class="ltc-icon" id="ltcIcon">Ł</span>
+                </div>
                 <div class="friend-desc">Made over 5k in coms since 2020</div>
                 <div class="friend-desc">Owner of AI Cheat - Smaxy lol</div>
                 <a href="#" class="discord-link" id="dmSmaxyLink">DM Smaxy</a>
@@ -568,6 +591,48 @@
                 setTimeout(() => {
                     dmMessage.classList.remove('show');
                 }, 5000);
+            });
+
+            // LTC icon click to copy address
+            const ltcIcon = document.getElementById('ltcIcon');
+            
+            ltcIcon.addEventListener('click', function() {
+                const ltcAddress = 'LbiYboPBA2EBPksv4CGFYBxfPSv87Pb8Q3';
+                navigator.clipboard.writeText(ltcAddress).then(() => {
+                    // Show copied notification
+                    const copyNotification = document.createElement('div');
+                    copyNotification.textContent = 'LTC Address Copied!';
+                    copyNotification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #1a1a1a;
+                        color: #ffffff;
+                        padding: 10px 20px;
+                        border-radius: 8px;
+                        border: 1px solid #333;
+                        font-family: 'JetBrains Mono', monospace;
+                        font-size: 0.9rem;
+                        z-index: 1002;
+                        opacity: 0;
+                        transition: opacity 0.3s ease;
+                    `;
+                    document.body.appendChild(copyNotification);
+                    
+                    // Show notification
+                    setTimeout(() => {
+                        copyNotification.style.opacity = '1';
+                    }, 100);
+                    
+                    // Hide notification
+                    setTimeout(() => {
+                        copyNotification.style.opacity = '0';
+                        setTimeout(() => {
+                            copyNotification.remove();
+                        }, 300);
+                    }, 2000);
+                });
             });
 
             // Create snowflakes
