@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaola Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .card {
+            background: #111111;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #555;
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .profile-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-item:hover {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .profile-label {
+            font-weight: 500;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .profile-value {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: #1a1a1a;
+            border-radius: 25px;
+            border: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ffffff;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .pasteboard {
+            background: #111111;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+            position: relative;
+        }
+
+        .board {
+            background: #000000;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .board-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .project-item {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            background: #222;
+            border-color: #555;
+            transform: translateY(-2px);
+        }
+
+        .project-name {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .project-desc {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .corner-image {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 1px solid #333;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+
+        .corner-image:hover {
+            transform: scale(1.1);
+        }
+
+        .corner-image:active {
+            transform: scale(0.95);
+        }
+
+
+        .click-message {
+            position: fixed;
+            bottom: 240px;
+            left: 20px;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            z-index: 1001;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .click-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            width: 4px;
+            height: 4px;
+            background: #ffffff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .link-card {
+            background: #1a1a1a;
+            padding: 20px 25px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #888;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .link-card:hover {
+            background: #222;
+            color: #ffffff;
+            border-color: #555;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 30px 0;
+            color: #888;
+            font-size: 1rem;
+            border-top: 1px solid #333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 20px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .card {
+                padding: 30px 25px;
+            }
+            
+            .profile-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Profile</h1>
+            <p class="subtitle">Teaola Life</p>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">About</h2>
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <span class="profile-label">founder</span>
+                    <span class="profile-value">teaola.life</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Location</span>
+                    <span class="profile-value">Kazakhstan</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Age</span>
+                    <span class="profile-value">14</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">IDE</span>
+                    <span class="profile-value">VS Code</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Discord Status</span>
+                    <span class="profile-value">
+                        <div class="status-badge">
+                            <div class="status-dot"></div>
+                            <span>Online</span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="pasteboard">
+            <h2 class="section-title">Projects Board</h2>
+            <div class="board">
+                <div class="board-title">Active Projects</div>
+                <div class="projects-grid">
+                    <div class="project-item">
+                        <div class="project-name">Webrat</div>
+                        <div class="project-desc">Made RCE</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">Normal Exworm</div>
+                        <div class="project-desc">RCE</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">Xworm</div>
+                        <div class="project-desc">RCE Patched</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">Anydesk</div>
+                        <div class="project-desc">RCE</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">TelegramBot</div>
+                        <div class="project-desc">Bot Platform</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">FUD</div>
+                        <div class="project-desc">Crypter Tool</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom left corner image -->
+        <img src="image.png" alt="Corner Image" class="corner-image" id="cornerImage">
+        
+        <!-- Click message -->
+        <div class="click-message" id="clickMessage">one jew killed</div>
+        
+
+        <div class="card">
+            <h2 class="section-title">Quick Links</h2>
+            <div class="links-grid">
+                <a href="https://discord.com" class="link-card" onclick="alert('DM driver00101010100101010'); return false;">Discord</a>
+                <a href="#" class="link-card" onclick="alert('Soon'); return false;">GitHub</a>
+                <a href="https://t.me/Teaolav2" class="link-card">Telegram</a>
+                <a href="https://t.me/Teaudp" class="link-card" onclick="alert('DM @Teaudp on TG'); return false;">Contact</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            ©2025 - teaola.life
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cornerImage = document.getElementById('cornerImage');
+            const clickMessage = document.getElementById('clickMessage');
+            
+            cornerImage.addEventListener('click', function() {
+                // Show the message
+                clickMessage.classList.add('show');
+                
+                // Hide the message after 5 seconds (longer time)
+                setTimeout(() => {
+                    clickMessage.classList.remove('show');
+                }, 5000);
+            });
+
+            // Create snowflakes
+            function createSnowflake() {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                snowflake.style.opacity = Math.random();
+                snowflake.style.width = Math.random() * 3 + 2 + 'px';
+                snowflake.style.height = snowflake.style.width;
+                
+                document.body.appendChild(snowflake);
+                
+                setTimeout(() => {
+                    snowflake.remove();
+                }, 5000);
+            }
+
+            // Create snowflakes periodically
+            setInterval(createSnowflake, 200);
+        });
+    </script>
+
+</body>
+</html>
