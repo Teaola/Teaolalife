@@ -23,26 +23,51 @@
 
         .custom-cursor {
             position: fixed;
-            width: 20px;
-            height: 20px;
+            width: 12px;
+            height: 12px;
             background: #ffffff;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             mix-blend-mode: difference;
-            transition: transform 0.1s ease;
+            transition: transform 0.2s ease;
+            transform: translate(-50%, -50%);
         }
 
         .custom-cursor::before {
             content: '';
             position: absolute;
-            top: -5px;
-            left: -5px;
-            width: 30px;
-            height: 30px;
-            border: 2px solid #ffffff;
+            top: -8px;
+            left: -8px;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            opacity: 0.5;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .custom-cursor::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .custom-cursor:hover::before {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .custom-cursor:hover::after {
+            opacity: 1;
+            transform: scale(1.1);
         }
 
         .container {
@@ -245,6 +270,7 @@
             font-size: 0.9rem;
         }
 
+
         .ltc-icon {
             color: #ffffff;
             font-size: 1.2rem;
@@ -282,6 +308,7 @@
             box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
         }
 
+
         .corner-image {
             position: fixed;
             bottom: 20px;
@@ -303,6 +330,59 @@
 
         .corner-image:active {
             transform: scale(0.95);
+        }
+
+        .project-logo {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            border-radius: 4px;
+            margin-left: 8px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .monero-icon {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-left: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .monero-icon:hover {
+            color: #888;
+            transform: scale(1.1);
+        }
+
+            .vscode-icon {
+                width: 16px;
+                height: 16px;
+                object-fit: contain;
+                border-radius: 4px;
+                margin-left: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+        .vscode-icon:hover {
+            color: #888;
+            transform: scale(1.1);
+        }
+
+        .link-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            border-radius: 4px;
+            margin-left: 8px;
+            display: inline-block;
+            vertical-align: middle;
+            background: transparent;
         }
 
 
@@ -370,6 +450,130 @@
         .ip-notification.show {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .visitor-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            z-index: 1001;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .visitor-counter.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-volume-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1001;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .volume-label {
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .glass-slider {
+            width: 20px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1px;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            transition: all 0.15s ease;
+            padding: 10px 0;
+            margin: -10px 0;
+        }
+
+        .glass-slider:hover {
+            width: 120px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.15s ease;
+        }
+
+        .glass-slider:hover::-webkit-slider-thumb {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .volume-value {
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            min-width: 35px;
+            text-align: center;
         }
 
         .snowflake {
@@ -467,7 +671,7 @@
             <div class="profile-grid">
                 <div class="profile-item">
                     <span class="profile-label">founder</span>
-                    <span class="profile-value">teaola.life</span>
+                    <span class="profile-value">Tea/Driver</span>
                 </div>
                 <div class="profile-item">
                     <span class="profile-label">Location</span>
@@ -479,11 +683,17 @@
                 </div>
                 <div class="profile-item">
                     <span class="profile-label">Node</span>
-                    <span class="profile-value">Running private Monero node</span>
+                    <span class="profile-value">
+                        Running private Monero node
+                        <span class="monero-icon">Ⓜ</span>
+                    </span>
                 </div>
                 <div class="profile-item">
                     <span class="profile-label">IDE</span>
-                    <span class="profile-value">VS Code</span>
+                    <span class="profile-value">
+                        VS Code
+                        <img src="https://th.bing.com/th/id/R.3c4b2ee09c3d91bfa37868c6098969a7?rik=nH8PFQkrBD%2bbOA&pid=ImgRaw&r=0" alt="VS Code" class="vscode-icon">
+                    </span>
                 </div>
                 <div class="profile-item">
                     <span class="profile-label">Discord Status</span>
@@ -507,19 +717,28 @@
                         <div class="project-desc">Made RCE</div>
                     </div>
                     <div class="project-item">
-                        <div class="project-name">Normal Exworm</div>
+                        <div class="project-name">
+                            Normal Exworm
+                            <img src="https://media.tenor.com/0aDU5Gaba4UAAAAi/x-worm.gif" alt="X-Worm" class="project-logo">
+                        </div>
                         <div class="project-desc">RCE</div>
                     </div>
-                    <div class="project-item">
-                        <div class="project-name">Xworm</div>
-                        <div class="project-desc">RCE Patched</div>
+                <div class="project-item">
+                    <div class="project-name">
+                        Xworm
+                        <img src="https://media.tenor.com/0aDU5Gaba4UAAAAi/x-worm.gif" alt="X-Worm" class="project-logo">
                     </div>
+                    <div class="project-desc">RCE Patched</div>
+                </div>
                     <div class="project-item">
                         <div class="project-name">Anydesk</div>
                         <div class="project-desc">RCE</div>
                     </div>
                     <div class="project-item">
-                        <div class="project-name">TelegramBot</div>
+                        <div class="project-name">
+                            TelegramBot
+                            <img src="https://static.vecteezy.com/system/resources/previews/016/716/472/non_2x/telegram-icon-free-png.png" alt="Telegram" class="project-logo">
+                        </div>
                         <div class="project-desc">Bot Platform</div>
                     </div>
                     <div class="project-item">
@@ -533,6 +752,7 @@
         <!-- Bottom left corner image -->
         <img src="image.png" alt="Corner Image" class="corner-image" id="cornerImage">
         
+        
         <!-- Click message -->
         <div class="click-message" id="clickMessage">one jew killed</div>
         
@@ -541,6 +761,30 @@
         
         <!-- IP Address notification -->
         <div class="ip-notification" id="ipMessage">Your IP: Loading...</div>
+        
+        <!-- Visitor Counter -->
+        <div class="visitor-counter" id="visitorCounter">Visitors: Loading...</div>
+        
+        <!-- Background Music -->
+        <audio id="bg-music" autoplay loop>
+            <source src="https://files.catbox.moe/c93mlc.mp4" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <!-- Glass Volume Control -->
+        <div class="glass-volume-control">
+            <button id="playPauseBtn" class="glass-btn">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                </svg>
+            </button>
+            <div class="volume-container">
+                <span class="volume-label">VOL</span>
+                <input type="range" id="volumeSlider" min="0" max="100" value="50" class="glass-slider">
+                <span id="volumeDisplay" class="volume-value">50%</span>
+            </div>
+        </div>
+        
         
 
         <div class="card">
@@ -577,19 +821,21 @@
             const clickMessage = document.getElementById('clickMessage');
             const cursor = document.querySelector('.custom-cursor');
             
-            // Custom cursor movement
+            // Custom cursor movement - instant follow
             document.addEventListener('mousemove', function(e) {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
             });
             
-            // Cursor hover effects
-            document.querySelectorAll('a, button, .corner-image').forEach(el => {
+            // Cursor hover effects with smooth transitions
+            document.querySelectorAll('a, button, .corner-image, .glass-btn, .glass-slider').forEach(el => {
                 el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                    cursor.style.background = 'rgba(255, 255, 255, 0.9)';
                 });
                 el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.background = '#ffffff';
                 });
             });
             
@@ -683,6 +929,29 @@
                     }, 3000);
                 });
 
+            // Visitor Counter
+            const visitorCounter = document.getElementById('visitorCounter');
+            
+            // Get current visitor count from localStorage
+            let visitorCount = localStorage.getItem('teaolaVisitors');
+            if (!visitorCount) {
+                visitorCount = 1;
+            } else {
+                visitorCount = parseInt(visitorCount) + 1;
+            }
+            
+            // Save updated count
+            localStorage.setItem('teaolaVisitors', visitorCount);
+            
+            // Display counter
+            visitorCounter.textContent = `Visitors: ${visitorCount}`;
+            visitorCounter.classList.add('show');
+            
+            // Hide after 8 seconds
+            setTimeout(() => {
+                visitorCounter.classList.remove('show');
+            }, 8000);
+
             // Create snowflakes
             function createSnowflake() {
                 const snowflake = document.createElement('div');
@@ -702,6 +971,50 @@
 
             // Create snowflakes periodically
             setInterval(createSnowflake, 200);
+
+            // Glass Volume Control
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const volumeDisplay = document.getElementById('volumeDisplay');
+            const bgMusic = document.getElementById('bg-music');
+            
+            // Set initial volume
+            bgMusic.volume = 0.5;
+            
+            // Play/Pause button
+            playPauseBtn.addEventListener('click', function() {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    playPauseBtn.innerHTML = `
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                        </svg>
+                    `;
+                } else {
+                    bgMusic.pause();
+                    playPauseBtn.innerHTML = `
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    `;
+                }
+            });
+            
+            // Volume slider
+            volumeSlider.addEventListener('input', function() {
+                const volume = this.value / 100;
+                bgMusic.volume = volume;
+                volumeDisplay.textContent = Math.round(volume * 100) + '%';
+            });
+            
+            // Handle autoplay restrictions
+            bgMusic.addEventListener('canplay', function() {
+                // Try to play, but don't show error if blocked
+                bgMusic.play().catch(function(error) {
+                    console.log('Autoplay blocked:', error);
+                });
+            });
+
         });
     </script>
 
