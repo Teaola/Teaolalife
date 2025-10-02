@@ -350,6 +350,28 @@
             transform: translateX(-320px);
         }
 
+        .ip-notification {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            z-index: 1001;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .ip-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .snowflake {
             position: fixed;
             top: -10px;
@@ -517,6 +539,9 @@
         <!-- DM Smaxy notification -->
         <div class="dm-notification" id="dmMessage">DM koil.xyz on Discord</div>
         
+        <!-- IP Address notification -->
+        <div class="ip-notification" id="ipMessage">Your IP: Loading...</div>
+        
 
         <div class="card">
             <h2 class="section-title">Friends</h2>
@@ -634,6 +659,29 @@
                     }, 2000);
                 });
             });
+
+            // Get and display IP address
+            const ipMessage = document.getElementById('ipMessage');
+            
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    ipMessage.textContent = `Your IP: ${data.ip}`;
+                    ipMessage.classList.add('show');
+                    
+                    // Hide after 10 seconds
+                    setTimeout(() => {
+                        ipMessage.classList.remove('show');
+                    }, 10000);
+                })
+                .catch(error => {
+                    ipMessage.textContent = 'Your IP: Unable to fetch';
+                    ipMessage.classList.add('show');
+                    
+                    setTimeout(() => {
+                        ipMessage.classList.remove('show');
+                    }, 3000);
+                });
 
             // Create snowflakes
             function createSnowflake() {
